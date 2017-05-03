@@ -17,10 +17,9 @@ public class PhaseChange : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.CompareTag("portalCambioNivel"))
+        if(collider.CompareTag("Player"))
         {
             SceneManager.LoadScene("level" + level);
-
         }
     }
 }
