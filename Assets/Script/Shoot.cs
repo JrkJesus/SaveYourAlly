@@ -5,7 +5,8 @@ using UnityEngine;
 public class Shoot : MonoBehaviour {
 
     public int maxAmmo = 50;
-    public int _ammo=20;
+    private int _ammo=20;
+    [SerializeField]
     public int ammo { 
         get { return _ammo; }
         set
