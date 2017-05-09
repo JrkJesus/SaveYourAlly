@@ -11,6 +11,7 @@ public class RotatingItem : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(new Vector3(0, 0, Time.deltaTime * 80));
+       // transform.Rotate(new Vector3(0, 0, Time.deltaTime * 80)); //eje z
+        transform.Rotate(new Vector3(0, Time.deltaTime * 80, 0)); //eje y
 	}
 }
