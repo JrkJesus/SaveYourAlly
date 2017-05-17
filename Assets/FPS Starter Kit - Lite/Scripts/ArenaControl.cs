@@ -6,6 +6,7 @@ public class ArenaControl : MonoBehaviour
 {
     public GameObject robot1;// the first wave of robots
 	public GameObject robot2;// the second wave of robots
+    public GUIText score;
 
 	void Start(){
 
@@ -43,6 +44,11 @@ public class ArenaControl : MonoBehaviour
 			
 			robot2.SetActive(true);//   activate w2(the second wave of robots)
         }
+    }
+
+    void OnGUI()
+    {
+        score.text = ""+PlayerPrefs.GetInt("Score");
     }
 }
 
