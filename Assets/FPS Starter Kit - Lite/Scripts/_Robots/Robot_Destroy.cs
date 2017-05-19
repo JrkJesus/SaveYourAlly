@@ -19,7 +19,7 @@ public class Robot_Destroy : MonoBehaviour
     void Update()
     {
 		robot_health.text = "" + Robot_health;
-			if (Robot_health <= 0)
+		if (Robot_health <= 0)
         {
             Destroy(gameObject);// destroy robot
             if (ragdoll)
@@ -30,6 +30,8 @@ public class Robot_Destroy : MonoBehaviour
             a = PlayerPrefs.GetInt("Score"); //
             a++;                             // score calculation 
             PlayerPrefs.SetInt("Score", a);  //
+            GameObject ControladorObjetivos = GameObject.FindWithTag("GameController");
+            ControladorObjetivos.GetComponent<Condiciones>().enemiesKilled++;
         }
     }
 
