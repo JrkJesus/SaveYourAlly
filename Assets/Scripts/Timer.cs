@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour {
     public float timeMax = 60.0f;
-    public float countDown;
+    private float countDown;
+    public GUIText countDownText;
 
 	// Use this for initialization
 	void Start () {
@@ -21,4 +22,9 @@ public class Timer : MonoBehaviour {
              // SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 	}
+
+    void OnGUI()
+    {
+        countDownText.text = "" + Mathf.Round(countDown);
+    }
 }

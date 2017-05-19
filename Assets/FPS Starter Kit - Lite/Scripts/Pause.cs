@@ -34,6 +34,7 @@ public class Pause : MonoBehaviour
 
 
         }
+        Debug.Log(Time.timeScale);
     }
 
    void OnGUI()
