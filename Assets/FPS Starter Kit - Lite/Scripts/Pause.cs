@@ -20,7 +20,7 @@ public class Pause : MonoBehaviour
             {
                 menu = true; // menu = true
                 menu_on();
-				Time.timeScale = 0;// time stopped
+                Time.timeScale = 0;// time stopped
                 return;
 
             }
@@ -31,10 +31,7 @@ public class Pause : MonoBehaviour
                 menu_off();
                 return;
             }
-
-
         }
-        Debug.Log(Time.timeScale);
     }
 
    void OnGUI()
