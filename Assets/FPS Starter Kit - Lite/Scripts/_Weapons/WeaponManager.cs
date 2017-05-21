@@ -29,6 +29,8 @@ public class WeaponManager : MonoBehaviour
     public GameObject pattext;    //
     public GameObject grentext;   //
 
+    private int[] weaponAmmo = new int[] { 0, 0, 0 };
+
 
     void Start()
     {
@@ -42,6 +44,27 @@ public class WeaponManager : MonoBehaviour
         pattext.SetActive(true);     //
         grentext.SetActive(true);    //
 
+    }
+
+    public void recargar(int arma, int municion)
+    {
+        if (current_Weapon-1 == arma)
+        {
+            switch (arma)
+            {
+                case 0: gun.inventoryAmmo += municion;
+                    break;
+                case 1: snaiper_rifle.inventoryAmmo += municion;
+                    break;
+                case 2: rocket_launcher.inventoryAmmo += municion;
+                    break;
+            }
+        }
+        else
+        {
+            weaponAmmo[arma] += municion;
+        }
+        
     }
 
     void Update()
@@ -136,22 +159,27 @@ public class WeaponManager : MonoBehaviour
 
 		if (current_Weapon == 1) {
 			
-				Null_Weapons ();
-				weapon1.SetActive (true);//activate 1 weapon
-				weapon1.GetComponent<Animation>().Play("Gun_On");			
-		}
+			Null_Weapons ();
+			weapon1.SetActive (true);//activate 1 weapon
+			weapon1.GetComponent<Animation>().Play("Gun_On");
+            gun.inventoryAmmo += weaponAmmo[current_Weapon - 1];
+        }
 			
 		if (current_Weapon == 2) {
-				Null_Weapons ();
-				weapon2.SetActive (true);//activate 2 weapon
-				weapon2.GetComponent<Animation>().Play("SniperRifle_On");
-		}
+			Null_Weapons ();
+			weapon2.SetActive (true);//activate 2 weapon
+			weapon2.GetComponent<Animation>().Play("SniperRifle_On");
+            snaiper_rifle.inventoryAmmo += weaponAmmo[current_Weapon - 1];
+        }
 
 		if (current_Weapon == 3) {
-				Null_Weapons ();
-				weapon3.SetActive (true);//activate 3 weapon
-				weapon3.GetComponent<Animation>().Play("RocketLauncher_On");
-		}
+			Null_Weapons ();
+			weapon3.SetActive (true);//activate 3 weapon
+			weapon3.GetComponent<Animation>().Play("RocketLauncher_On");
+            rocket_launcher.inventoryAmmo += weaponAmmo[current_Weapon - 1];
+        }
+        
+        weaponAmmo[current_Weapon - 1] = 0;
     }
 }
 
