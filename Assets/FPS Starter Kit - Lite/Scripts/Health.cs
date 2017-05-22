@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
                 timeout += Time.deltaTime;// timer active
                 if (timeout >= 1)// after 1 second
                 {
-					SceneManager.LoadScene (0, LoadSceneMode.Single);                
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);                
 				}
             }
             player_health = player_health_min;// curent health = min health

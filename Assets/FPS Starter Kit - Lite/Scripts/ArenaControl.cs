@@ -29,7 +29,7 @@ public class ArenaControl : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Q))// if reset progress then score =0;
         {
             
-			SceneManager.LoadScene (0, LoadSceneMode.Single);//reload scene
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 			PlayerPrefs.SetInt("Score", 0);
 
         }
