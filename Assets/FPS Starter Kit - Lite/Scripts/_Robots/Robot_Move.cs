@@ -63,10 +63,12 @@ public class Robot_Move : MonoBehaviour
         {
 
             CanShoot = false;// not shoot
+            anim.SetBool("CanWalk", true);// play animation in animator
         }
         else
         {
             CanShoot = true;// shoot
+            anim.SetBool("CanWalk", false);// play animation in animator
         }
         
     }

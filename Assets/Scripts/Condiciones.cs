@@ -13,6 +13,7 @@ public class Condiciones : MonoBehaviour {
     public bool bossKilled = false;
 
     public GUIText objectives;
+    public ArenaControl control;
 
     void OnGUI()
     {
@@ -41,6 +42,6 @@ public class Condiciones : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		
+        if (enemiesKilled >= enemiesToKill && chestsTaken == chestsToTake && mustKillBoss == bossKilled) control.activateFinishGUI(true);
 	}
 }
