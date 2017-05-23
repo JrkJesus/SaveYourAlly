@@ -39,15 +39,17 @@ public class Robot_Move : MonoBehaviour
         if (agent.remainingDistance < reach_distance)
         {
             agent.speed=speed;
+            anim.SetBool("CanWalk", true);// play animation in animator
         } 
         else
         {
             agent.speed = 0;
+            anim.SetBool("CanWalk", false);// play animation in animator
         }
         
 
 
-
+/*
         if (distancia > stop_distance && distancia < reach_distance)// if distance(robot-fps) >10
         {
             anim.SetBool("CanWalk", true);// play animation in animator
@@ -56,7 +58,7 @@ public class Robot_Move : MonoBehaviour
         {
             anim.SetBool("CanWalk", false);// play animation in animator
         }
-
+*/
         if (distancia > shoot_distance)// if distance(robot-fps) > 20
         {
 
