@@ -40,20 +40,28 @@ public class Pause : MonoBehaviour
 
 		if (menu) {// if menu = true  
 
-			if (GUI.Button(new Rect(Screen.width / 2 - 140, Screen.height / 2 - 150, 280, 80), "Continue"))//if press "continue"
+			if (GUI.Button(new Rect(Screen.width / 2 - 140, Screen.height / 2 - 100, 280, 80), "Continue"))//if press "continue"
 			{
 				menu = false;//close menu
 				Time.timeScale = 1;// normal time
 				menu_off();
 
 			}
-			if (GUI.Button (new Rect (Screen.width / 2 - 140, Screen.height / 2 -85, 280, 80), "Menu")) {// if press "menu"
+			if (GUI.Button (new Rect (Screen.width / 2 - 140, Screen.height / 2, 280, 80), "Opciones")) {// if press "menu"
 				menu = false; // close menu
 				Time.timeScale = 1;// normal time
-				SceneManager.LoadScene (0, LoadSceneMode.Single);//reload scene
+				SceneManager.LoadScene ("Configuracion");//reload scene
 				menu_off ();                  
 			}
-		}
+
+            if (GUI.Button(new Rect(Screen.width / 2 - 140, Screen.height / 2 + 100, 280, 80), "Menu"))
+            {// if press "menu"
+                menu = false; // close menu
+                Time.timeScale = 1;// normal time
+                SceneManager.LoadScene(0, LoadSceneMode.Single);//reload scene
+                menu_off();
+            }
+        }
 	}
         
     

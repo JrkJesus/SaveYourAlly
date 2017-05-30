@@ -13,20 +13,25 @@ public class ArenaControl : MonoBehaviour
     public GameObject gui;
     public GameObject finishGUI;
     public GameObject weapons;// weapon manager
+    public GameObject tick;
+    
 
     private float timeOut;
+    private int points;
 
 	void Start()
     {
-        Cursor.visible = PlayerPrefs.GetInt("cursorVisibility") == 1;
-	}
+        PlayerPrefs.SetInt("MenuFinal", 0);
+        menu_off();
+    }
 
     void Update()
     {
 
 		if (Input.GetKeyDown(KeyCode.Q))// if reset progress then score =0;
         {
-            changeScene(true);
+            //changeScene(true);
+            PlayerPrefs.SetInt("Score", PlayerPrefs.GetInt("Score")*2);
         }
 
     }
@@ -34,23 +39,64 @@ public class ArenaControl : MonoBehaviour
   
     public void changeScene(bool reset)
     {
-        menu_off();
         if(reset) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         else SceneManager.LoadScene("MenuPrincipal");
 
         PlayerPrefs.SetInt("Score", 0);
     }
 
+    public void SaveScore()
+    {
+        bool encontrado = false;
+        int i = phase*3;
+        string oldScore = "";
+        while( !encontrado && i < phase*3+3 )
+        {
+            string score = PlayerPrefs.GetString("Clasificacion" + i);
+            if (score == "" || int.Parse(score.Split(new string[] { ": " }, StringSplitOptions.None)[1]) < points)
+            {
+                oldScore = PlayerPrefs.GetString("Clasificacion" + i);
+                PlayerPrefs.SetString("Clasificacion" + i, GameObject.FindGameObjectWithTag("Puntuacion").GetComponent<InputField>().text + ": " + points);
+                GameObject.FindGameObjectWithTag("ButtonSave").GetComponent<Button>().interactable = false;
+                tick.SetActive(true);
+                encontrado = true;
+            }
+            else
+                i++;
+        }
+
+        for(int j = i+1; j < phase*3 + 3; j++)
+        {
+            string temp = oldScore;
+            oldScore = PlayerPrefs.GetString("Clasificacion" + j);
+            PlayerPrefs.SetString("Clasificacion" + j, temp);
+        }
+       
+        Debug.Log(i);
+    }
+
     public void activateFinishGUI(bool win)
     {
+        PlayerPrefs.SetInt("MenuFinal", 1);
         menu_on();
 
         if (win)
         {
-            int score = PlayerPrefs.GetInt("Score");
+            points = (int) (PlayerPrefs.GetInt("Score") * (1 + GetComponent<Timer>().timeLeft/100) * PlayerPrefs.GetFloat("Bonificador"));
             string msg = "";
-            if (score > getMinScore(phase)) msg += "New record: ";
-            msg += score + "\n Introduce tu nombre para guardar la puntuacion: ";
+            if (points > getMinScore(phase))
+            {
+                msg += "New record: ";
+
+              
+            }
+            else
+            {
+                msg += "Score: ";
+                GameObject.FindGameObjectWithTag("Puntuacion").GetComponent<InputField>().interactable = false;
+                GameObject.FindGameObjectWithTag("ButtonSave").GetComponent<Button>().interactable = false;
+            }
+            msg += points + "\n Introduce tu nombre para guardar la puntuacion: ";
             msgFinishGame.text = msg;
         }
         else
@@ -69,7 +115,7 @@ public class ArenaControl : MonoBehaviour
         gui.SetActive(false); // deactivate textures
         finishGUI.SetActive(true);
         Cursor.visible = true; // cursor = true
-
+        Time.timeScale = 0;
     }
 
      void menu_off()// if menu close
@@ -80,13 +126,19 @@ public class ArenaControl : MonoBehaviour
         weapons.SetActive(true);// activate weapons
         gui.SetActive(true);// activate textures
         finishGUI.SetActive(false);
-		Cursor.visible = false;// cursor = true
-
+        Cursor.visible = PlayerPrefs.GetInt("cursorVisibility") == 1;
+        Time.timeScale = 1;
+        if (PlayerPrefs.GetInt("MenuFinal") == 1)
+        {
+            GameObject.FindGameObjectWithTag("Puntuacion").GetComponent<InputField>().interactable = true;
+            GameObject.FindGameObjectWithTag("ButtonSave").GetComponent<Button>().interactable = true;
+            PlayerPrefs.SetInt("MenuFinal", 0);
+        }
     }
 
     private int getMinScore(int phase)
     {
-        string score = PlayerPrefs.GetString("Clasificacion" + (phase + 2));
+        string score = PlayerPrefs.GetString("Clasificacion" + (phase*3 + 2));
         if (score == "")
         {
             return 0;

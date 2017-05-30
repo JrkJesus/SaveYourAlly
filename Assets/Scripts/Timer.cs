@@ -7,10 +7,14 @@ public class Timer : MonoBehaviour {
     public float timeMax = 60.0f;
     private float countDown;
     public GUIText countDownText;
+    public float timeLeft
+    {
+        get { return countDown; }
+    }
 
 	// Use this for initialization
 	void Start () {
-        countDown = timeMax;
+        countDown = timeMax * (PlayerPrefs.GetFloat("Tiempo") + 1);
 	}
 	
 	// Update is called once per frame

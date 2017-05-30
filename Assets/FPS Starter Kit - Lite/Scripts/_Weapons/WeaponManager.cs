@@ -30,19 +30,36 @@ public class WeaponManager : MonoBehaviour
     public GameObject grentext;   //
 
     private int[] weaponAmmo = new int[] { 0, 0, 0 };
+    private int[] invAmmo = new int[] { 70, 25, 15 }; 
 
 
     void Start()
     {
-		
-		Null_Weapons();
+        for(int i = 0; i<3; i++)
+        {
+            weaponAmmo[i] = (int)(invAmmo[i] * 0.5 * (PlayerPrefs.GetFloat("Municion") + 1)) - invAmmo[i];
+        }
+        if(PlayerPrefs.GetFloat("Random") == 1)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                float rnd = Random.value;
+                Debug.Log(weaponAmmo[i]);
+                weaponAmmo[i] -= (int) (invAmmo[i] * rnd);
+                Debug.Log(rnd);
+                Debug.Log(weaponAmmo[i]);
+
+            }
+        }
+
+        Null_Weapons();
 		Null_Weapons_mode ();
-        pattexture.SetActive(true);  //
-        grentexture.SetActive(true); // 
-        hptexture.SetActive(true);   //
-        hptext.SetActive(true);      // activate all textures
-        pattext.SetActive(true);     //
-        grentext.SetActive(true);    //
+        //pattexture.SetActive(true);  //
+        //grentexture.SetActive(true); // 
+       // hptexture.SetActive(true);   //
+       // hptext.SetActive(true);      // activate all textures
+       // pattext.SetActive(true);     //
+       // grentext.SetActive(true);    //
 
     }
 

@@ -29,6 +29,10 @@ public class Health : MonoBehaviour
         }
     }
     
+    void Start()
+    {
+        _player_health = (int) (_player_health * 0.5 * (PlayerPrefs.GetFloat("Vida") + 1));
+    }
     
     void Update()
     {
@@ -41,6 +45,7 @@ public class Health : MonoBehaviour
                 timeOut += Time.deltaTime;// timer active
                 if (timeOut >= 1)// after 1 second
                 {
+                    camera.GetComponent<Animation>().Stop("Die");
                     control.activateFinishGUI(false);
                 }
             }

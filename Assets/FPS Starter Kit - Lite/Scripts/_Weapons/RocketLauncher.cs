@@ -13,9 +13,9 @@ public class RocketLauncher : MonoBehaviour
     public bool CanShoot;
     public float RateOfSpeed = 0.5f;// rate of shoot
     private float _rateofSpeed;
-    public int curAmmo = 12;// current ammo
+    public int curAmmo = 0;// current ammo
     public int maxAmmo = 12;//max ammo
-    public int inventoryAmmo = 24;// ammo in inventory
+    public int inventoryAmmo = 24; // ammo in inventory
     public GUIText bulletGUI; // text which shows the current ammo
 
     public AnimationClip _Idle;  //

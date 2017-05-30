@@ -13,7 +13,7 @@ public class SnaiperRifle : MonoBehaviour
     private float _rateofSpeed;
     public int curAmmo = 0;// curent ammo
     public int maxAmmo = 12;// max ammo
-    public int inventoryAmmo = 24;// ammo in inventory
+    public int inventoryAmmo = 24; // ammo in inventory
     public bool aim;// can aim
     private float timeout = 0.2f;// timer
     public float Accuracy = 0.01f;//accuracy of bullets
