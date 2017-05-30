@@ -71,8 +71,6 @@ public class ArenaControl : MonoBehaviour
             oldScore = PlayerPrefs.GetString("Clasificacion" + j);
             PlayerPrefs.SetString("Clasificacion" + j, temp);
         }
-       
-        Debug.Log(i);
     }
 
     public void activateFinishGUI(bool win)

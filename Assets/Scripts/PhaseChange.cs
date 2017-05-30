@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PhaseChange : MonoBehaviour {
     public string phaseToChange = "MenuPrincipal";
+    public int phase;
 	// Use this for initialization
 	void Start () {
         
@@ -17,7 +18,7 @@ public class PhaseChange : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.CompareTag("Player"))
+        if(collider.CompareTag("Player") && (PlayerPrefs.GetString("Clasificacion"+((phase-2)*3)) != "" || phase == 1) )
         {
             SceneManager.LoadScene(phaseToChange);
         }
